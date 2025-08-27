@@ -1,0 +1,204 @@
+1. Overview
+
+CleanHomes is a professional home cleaning company offering a range of services, including Standard Cleaning, Deep Cleaning, Move-In/Move-Out Cleaning, and Recurring Cleaning. The new website will serve as the primary customer-facing platform for learning about services, exploring pricing, booking cleanings, and building trust with potential clients.
+
+The website must deliver a modern, clean, and user-friendly experience with a focus on conversion (getting visitors to book services).
+
+2. Objectives
+
+Provide clear, appealing descriptions of services to help customers understand their options.
+
+Display transparent pricing and packages with easy-to-understand breakdowns.
+
+Allow customers to book services online quickly and easily.
+
+Provide policy and contact information to build trust and credibility.
+
+Maintain a unique, visually appealing design that reflects professionalism and care.
+
+3. Key Features
+3.1 Home Page
+
+Hero section with a clean tagline (e.g., “Because Every Home Deserves to Shine”).
+
+Prominent Call-to-Action (CTA) buttons:
+
+Book Now
+
+View Pricing
+
+Explore Services
+
+Highlights of core services (with images/icons).
+
+Quick preview of pricing.
+
+Testimonials (dummy for now).
+
+Trust signals: service guarantee, insured cleaners, eco-friendly supplies (dummy claims for now).
+
+3.2 Services Section
+
+Each cleaning service will have its own dedicated page with detailed information:
+
+a) Standard Cleaning
+
+Title Suggestions: Sparkling Home Care, Fresh & Tidy Cleaning, Complete Home Shine.
+
+Description: Routine cleaning for a tidy home, covering dusting, vacuuming, mopping, bathroom sanitization, and kitchen surfaces.
+
+Pricing:
+
+Starting at $80 (1 room/1 bath).
+
+Additional Rooms: $20 each.
+
+Additional Bathrooms: $15 each.
+
+CTA: Book Standard Cleaning.
+
+b) Deep Cleaning
+
+Title Suggestions: Deep Refresh, Total Home Renewal, Every Corner Clean.
+
+Description: Detailed cleaning covering hard-to-reach areas like tiles, baseboards, inside cabinets, and appliances.
+
+Pricing:
+
+Starting at $150 (1 room/1 bath).
+
+Additional Rooms: $25 each.
+
+Additional Bathrooms: $20 each.
+
+CTA: Book Deep Cleaning.
+
+c) Move-In/Move-Out Cleaning
+
+Title Suggestions: Move Fresh, Spotless Start, Clean Slate Service.
+
+Description: Perfect for tenants or landlords preparing properties. Ensures every space is spotless for new occupants.
+
+Pricing:
+
+Starting at $200 (1 room/1 bath).
+
+Additional Rooms: $35 each.
+
+Additional Bathrooms: $25 each.
+
+CTA: Book Move-In/Out Cleaning.
+
+d) Recurring Cleaning
+
+Title Suggestions: Always Clean Plan, Fresh Routine, Home Care Membership.
+
+Description: Scheduled cleanings (weekly, bi-weekly, monthly) at discounted rates. Keeps your home consistently clean.
+
+Pricing:
+
+Starting at $80 (1 room/1 bath).
+
+Weekly: 10% off.
+
+Bi-weekly: 15% off.
+
+Monthly: 20% off.
+
+Additional Rooms: $30 each.
+
+Additional Bathrooms: $25 each.
+
+CTA: Book Recurring Cleaning.
+
+3.3 Pricing & Plans Page
+
+Interactive pricing table or carousel showing all services.
+
+Each plan includes:
+
+Base pricing.
+
+Additional room/bathroom add-ons.
+
+Discounts for recurring services.
+
+Prominent Book Now button under each plan.
+
+3.4 Booking System
+
+Online booking form with the following fields:
+
+Service Type (dropdown: Standard, Deep, Move-In/Move-Out, Recurring).
+
+Number of Rooms & Bathrooms.
+
+Preferred Date & Time.
+
+Frequency (One-time, Weekly, Bi-weekly, Monthly).
+
+Customer Details: Name, Email, Phone, Address.
+
+Booking flow:
+
+Customer selects plan and inputs details.
+
+Booking request is confirmed via email/SMS.
+
+Admin receives booking notification.
+
+3.5 Policies Section
+
+A dedicated page covering:
+
+Booking Policies (e.g., how far in advance to book).
+
+Cancellation Policy (e.g., 24-hour notice).
+
+Refund Policy (dummy placeholder: refunds only under certain conditions).
+
+Service Guarantee (dummy placeholder: satisfaction guarantee).
+
+3.6 Contact Page
+
+Contact form (Name, Email, Message).
+
+Phone number & email address.
+
+Location / Service area map.
+
+CTA: Get in Touch.
+
+3.7 About Us Page
+
+CleanHomes mission and values.
+
+“Why choose us?” section (dummy benefits like trained staff, eco-friendly cleaning).
+
+Optional team introduction (dummy placeholders).
+
+3.8 Testimonials Page (Optional for MVP)
+
+Showcase customer reviews (dummy placeholder reviews).
+
+Include name, city, and star rating format.
+
+4. Functional Requirements
+
+Responsive Design: Website must work seamlessly across desktop, tablet, and mobile.
+
+SEO Optimization: Clean structure, meta tags, alt text, and fast loading.
+
+Booking System: Must validate inputs and confirm booking with both user and admin.
+
+CMS Requirement: Admin should easily update services, pricing, policies, and FAQs.
+
+5. Non-Functional Requirements
+
+Performance: Pages load within 3 seconds.
+
+Security: Encrypted booking data, SSL certificate.
+
+Scalability: Should support growth in traffic and services.
+
+Accessibility: WCAG-compliant (readable fonts, alt-text, color contrast).
