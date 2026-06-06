@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, XCircle, RotateCcw, Award, Clock, Shield, CreditCard, Users } from "lucide-react";
+import { Calendar, XCircle, RotateCcw, Award, Clock, Shield, CreditCard, Users, Phone, Mail } from "lucide-react";
 
 export default function PoliciesPage() {
   const policies = [

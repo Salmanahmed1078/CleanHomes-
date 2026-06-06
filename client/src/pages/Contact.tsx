@@ -5,22 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactMessageSchema } from "@shared/schema";
-import { z } from "zod";
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
+import { submitContact } from "@/lib/forms";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-
-type ContactFormData = z.infer<typeof insertContactMessageSchema>;
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(insertContactMessageSchema),
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -31,14 +27,13 @@ export default function ContactPage() {
   });
 
   const contactMutation = useMutation({
-    mutationFn: (data: ContactFormData) => apiRequest("POST", "/api/contact", data),
+    mutationFn: (data: ContactFormData) => submitContact(data),
     onSuccess: () => {
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you within 24 hours."
       });
       form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
     },
     onError: () => {
       toast({

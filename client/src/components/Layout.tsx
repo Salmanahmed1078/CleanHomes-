@@ -2,7 +2,20 @@ import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, Wrench, DollarSign, Users, Phone, FileText, Calendar } from "lucide-react";
+import {
+  Menu,
+  Home,
+  Wrench,
+  DollarSign,
+  Users,
+  Phone,
+  FileText,
+  Calendar,
+  Sparkles,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,52 +34,56 @@ export default function Layout({ children }: LayoutProps) {
     { name: "Policies", href: "/policies", icon: FileText },
   ];
 
+  const isActive = (href: string) =>
+    href === "/" ? location === "/" : location.startsWith(href);
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="bg-card border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-card/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex-shrink-0">
-                <h2 className="text-2xl font-bold text-primary" data-testid="logo">CleanHomes</h2>
+      <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+        <div className="section-shell">
+          <div className="flex h-16 items-center justify-between">
+            <Link href="/" className="group flex items-center gap-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-lg font-bold tracking-tight text-foreground">
+                  CleanHomes
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Bay Area cleaning
+                </p>
+              </div>
+            </Link>
+
+            <div className="hidden items-center gap-8 md:flex">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={
+                    isActive(item.href) ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Link href="/booking">
+                <Button className="rounded-full px-5 shadow-lg shadow-primary/20">
+                  Book Now
+                </Button>
               </Link>
             </div>
-            
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-center space-x-8">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`transition-colors ${
-                      location === item.href
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                    data-testid={`nav-${item.name.toLowerCase()}`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <Link href="/booking">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90" data-testid="button-book-now">
-                    Book Now
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            
-            {/* Mobile menu */}
+
             <div className="md:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" data-testid="button-mobile-menu">
+                  <Button variant="outline" size="icon" className="rounded-xl">
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right">
-                  <div className="grid gap-4 py-6">
+                <SheetContent side="right" className="w-[85vw] sm:w-[360px]">
+                  <div className="grid gap-2 py-6">
                     {navigation.map((item) => {
                       const Icon = item.icon;
                       return (
@@ -74,12 +91,11 @@ export default function Layout({ children }: LayoutProps) {
                           key={item.name}
                           href={item.href}
                           onClick={() => setIsOpen(false)}
-                          className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                            location === item.href
+                          className={`flex items-center gap-3 rounded-xl px-3 py-3 transition-colors ${
+                            isActive(item.href)
                               ? "bg-accent text-accent-foreground"
-                              : "hover:bg-accent hover:text-accent-foreground"
+                              : "hover:bg-muted"
                           }`}
-                          data-testid={`mobile-nav-${item.name.toLowerCase()}`}
                         >
                           <Icon className="h-4 w-4" />
                           {item.name}
@@ -87,8 +103,8 @@ export default function Layout({ children }: LayoutProps) {
                       );
                     })}
                     <Link href="/booking" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90" data-testid="mobile-button-book">
-                        <Calendar className="h-4 w-4 mr-2" />
+                      <Button className="mt-4 w-full rounded-full">
+                        <Calendar className="mr-2 h-4 w-4" />
                         Book Now
                       </Button>
                     </Link>
@@ -100,64 +116,100 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
 
-      {/* Main content */}
       <main>{children}</main>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-background py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4" data-testid="footer-logo">CleanHomes</h3>
-              <p className="text-background/80 mb-4">
-                Professional cleaning services that make your home shine.
+      <footer className="mt-20 border-t border-border bg-foreground text-background">
+        <div className="section-shell py-14">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
+                  <Sparkles className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <span className="text-xl font-bold">CleanHomes</span>
+              </div>
+              <p className="text-sm leading-relaxed text-background/75">
+                Modern, reliable home cleaning for busy households across the
+                Bay Area.
               </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-background/60 hover:text-background transition-colors" data-testid="social-facebook">
-                  <i className="fab fa-facebook text-xl"></i>
-                </a>
-                <a href="#" className="text-background/60 hover:text-background transition-colors" data-testid="social-instagram">
-                  <i className="fab fa-instagram text-xl"></i>
-                </a>
-                <a href="#" className="text-background/60 hover:text-background transition-colors" data-testid="social-twitter">
-                  <i className="fab fa-twitter text-xl"></i>
-                </a>
+              <div className="flex gap-3">
+                {[Facebook, Instagram, Twitter].map((Icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-background/15 text-background/70 transition-colors hover:bg-background/10 hover:text-background"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                ))}
               </div>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
-              <ul className="space-y-2">
-                <li><Link href="/services/standard" className="text-background/80 hover:text-background transition-colors" data-testid="footer-standard">Standard Cleaning</Link></li>
-                <li><Link href="/services/deep" className="text-background/80 hover:text-background transition-colors" data-testid="footer-deep">Deep Cleaning</Link></li>
-                <li><Link href="/services/moveout" className="text-background/80 hover:text-background transition-colors" data-testid="footer-moveout">Move-In/Out</Link></li>
-                <li><Link href="/services/recurring" className="text-background/80 hover:text-background transition-colors" data-testid="footer-recurring">Recurring Plans</Link></li>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-background/60">
+                Services
+              </h4>
+              <ul className="space-y-2 text-sm text-background/75">
+                <li>
+                  <Link href="/services/standard" className="hover:text-background">
+                    Standard Cleaning
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/deep" className="hover:text-background">
+                    Deep Cleaning
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/moveout" className="hover:text-background">
+                    Move-In/Out
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/recurring" className="hover:text-background">
+                    Recurring Plans
+                  </Link>
+                </li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="text-background/80 hover:text-background transition-colors" data-testid="footer-about">About Us</Link></li>
-                <li><Link href="/contact" className="text-background/80 hover:text-background transition-colors" data-testid="footer-contact">Contact</Link></li>
-                <li><Link href="/policies" className="text-background/80 hover:text-background transition-colors" data-testid="footer-policies">Policies</Link></li>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-background/60">
+                Company
+              </h4>
+              <ul className="space-y-2 text-sm text-background/75">
+                <li>
+                  <Link href="/about" className="hover:text-background">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-background">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/policies" className="hover:text-background">
+                    Policies
+                  </Link>
+                </li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-              <div className="space-y-2 text-background/80">
-                <div data-testid="footer-phone">(555) 123-4567</div>
-                <div data-testid="footer-email">info@cleanhomes.com</div>
-                <div data-testid="footer-location">San Francisco Bay Area</div>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-background/60">
+                Contact
+              </h4>
+              <div className="space-y-2 text-sm text-background/75">
+                <p>(555) 123-4567</p>
+                <p>info@cleanhomes.com</p>
+                <p>San Francisco Bay Area</p>
               </div>
             </div>
           </div>
-          
-          <div className="border-t border-background/20 mt-8 pt-8 text-center">
-            <p className="text-background/60" data-testid="footer-copyright">
-              &copy; 2024 CleanHomes. All rights reserved.
-            </p>
+
+          <div className="mt-10 border-t border-background/15 pt-6 text-center text-sm text-background/50">
+            © 2026 CleanHomes. All rights reserved.
           </div>
         </div>
       </footer>

@@ -63,9 +63,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        sans: ["Plus Jakarta Sans", "var(--font-sans)", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

@@ -6,26 +6,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertBookingSchema } from "@shared/schema";
-import { z } from "zod";
+import { bookingFormSchema, type BookingFormData } from "@/lib/schemas";
+import { submitBooking } from "@/lib/forms";
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { Calendar, Clock, DollarSign, Home, CheckCircle } from "lucide-react";
 
-const bookingFormSchema = insertBookingSchema.extend({
-  preferredDate: z.string().min(1, "Please select a preferred date"),
-  preferredTime: z.string().min(1, "Please select a preferred time")
-});
-
-type BookingFormData = z.infer<typeof bookingFormSchema>;
-
 export default function BookingPage() {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
   const [, navigate] = useLocation();
   const [estimatedPrice, setEstimatedPrice] = useState(80);
 
@@ -107,14 +98,13 @@ export default function BookingPage() {
   }, [form]);
 
   const bookingMutation = useMutation({
-    mutationFn: (data: BookingFormData) => apiRequest("POST", "/api/bookings", data),
+    mutationFn: (data: BookingFormData) => submitBooking(data),
     onSuccess: () => {
       toast({
         title: "Booking submitted successfully!",
         description: "We'll contact you within 2 hours to confirm your appointment."
       });
       form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/bookings"] });
       navigate("/");
     },
     onError: () => {

@@ -166,7 +166,7 @@ export default function ServiceDetailPage() {
             <p className="text-xl text-muted-foreground mb-6" data-testid="service-subtitle">
               {service.subtitle}
             </p>
-            {service.popular && (
+            {"popular" in service && service.popular && (
               <Badge className="bg-secondary text-secondary-foreground mb-6">
                 Most Popular Service
               </Badge>
@@ -206,11 +206,11 @@ export default function ServiceDetailPage() {
                       ${service.additionalBathrooms} each
                     </span>
                   </div>
-                  {service.discounts && (
+                  {"discounts" in service && service.discounts && (
                     <div className="border-t pt-4">
                       <h4 className="font-semibold mb-3">Frequency Discounts:</h4>
                       <div className="space-y-2">
-                        {service.discounts.map((discount, index) => (
+                        {service.discounts.map((discount: { frequency: string; discount: string; price: number }, index: number) => (
                           <div key={index} className="flex justify-between items-center">
                             <span>{discount.frequency}:</span>
                             <div className="text-right">
