@@ -13,4 +13,4 @@ All notable changes to **CleanHomes-** are documented here.
 ## Format
 `Added` `Changed` `Deprecated` `Removed` `Fixed` `Security`
 
-<!-- updated: 2026-06-16T12:08 -->
+<!-- updated: 2026-06-19T05:43 -->
